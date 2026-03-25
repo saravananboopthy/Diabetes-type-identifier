@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetes Intelligence System | Predictor</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <div class="app-container">
+        <header>
+            <div class="logo">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="40" height="40" rx="10" fill="var(--primary-color)"/>
+                    <path d="M20 10V30M10 20H30" stroke="white" stroke-width="4" stroke-linecap="round"/>
+                </svg>
+                <div class="logo-text">
+                    <h1>DiaPredict</h1>
+                    <span>Diabetes Intelligence System</span>
+                </div>
+            </div>
+            <div class="header-actions">
+                <div class="status-indicator">
+                    <span class="status-dot"></span>
+                    <span id="system-status">System Ready</span>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <section class="prediction-module fade-in">
+                <div class="module-header">
+                    <h2>Patient Clinical Profile</h2>
+                    <p>Enter diagnostic values for accurate diabetes type classification.</p>
+                </div>
+                
+                <form id="diabetesForm" class="grid-form">
+                    <div class="input-group">
+                        <label for="pregnancies">Pregnancies</label>
+                        <input type="number" id="pregnancies" required placeholder="Number of times">
+                    </div>
+                    <div class="input-group">
+                        <label for="glucose">Glucose (mg/dL)</label>
+                        <input type="number" step="0.1" id="glucose" required placeholder="Plasma glucose">
+                    </div>
+                    <div class="input-group">
+                        <label for="blood_pressure">Blood Pressure (mm Hg)</label>
+                        <input type="number" step="0.1" id="blood_pressure" required placeholder="Diastolic">
+                    </div>
+                    <div class="input-group">
+                        <label for="skin_thickness">Skin Thickness (mm)</label>
+                        <input type="number" step="0.1" id="skin_thickness" required placeholder="Triceps fold">
+                    </div>
+                    <div class="input-group">
+                        <label for="insulin">Insulin (mu U/ml)</label>
+                        <input type="number" step="0.1" id="insulin" required placeholder="2-hour serum">
+                    </div>
+                    <div class="input-group">
+                        <label for="bmi">BMI (kg/m²)</label>
+                        <input type="number" step="0.1" id="bmi" required placeholder="Body Mass Index">
+                    </div>
+                    <div class="input-group">
+                        <label for="dpf">Diabetes Pedigree</label>
+                        <input type="number" step="0.001" id="dpf" required placeholder="Lineage risk score">
+                    </div>
+                    <div class="input-group">
+                        <label for="age">Age (years)</label>
+                        <input type="number" id="age" required placeholder="Patient age">
+                    </div>
+                    
+                    <button type="submit" id="predictBtn">
+                        <span class="btn-text">Run Diagnosis</span>
+                        <div class="loader" id="btnLoader" style="display: none;"></div>
+                    </button>
+                </form>
+            </section>
+
+            <section class="results-module">
+                <div class="module-header">
+                    <h2>Diagnosis Output</h2>
+                </div>
+                
+                <div id="resultsPlaceholder" class="placeholder-msg">
+                    <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                    </svg>
+                    <p>Provide clinical data to view prediction results.</p>
+                </div>
+
+                <div id="resultsCard" class="results-card" style="display: none;">
+                    <div class="prediction-main">
+                        <div class="prediction-label" id="predictionResult">Type 2 Diabetes</div>
+                        <div class="confidence-badge">
+                            Confidence: <span id="confidenceValue">85%</span>
+                        </div>
+                    </div>
+
+                    <div class="probability-breakdown">
+                        <h3>Probability Breakdown</h3>
+                        <div class="prob-item">
+                            <div class="prob-labels">
+                                <span>No Diabetes</span>
+                                <span id="prob-no">10%</span>
+                            </div>
+                            <div class="prob-bar-bg">
+                                <div class="prob-bar" id="bar-no" style="width: 10%;"></div>
+                            </div>
+                        </div>
+                        <div class="prob-item">
+                            <div class="prob-labels">
+                                <span>Type 1</span>
+                                <span id="prob-t1">5%</span>
+                            </div>
+                            <div class="prob-bar-bg">
+                                <div class="prob-bar" id="bar-t1" style="width: 5%;"></div>
+                            </div>
+                        </div>
+                        <div class="prob-item active">
+                            <div class="prob-labels">
+                                <span>Type 2</span>
+                                <span id="prob-t2">85%</span>
+                            </div>
+                            <div class="prob-bar-bg">
+                                <div class="prob-bar" id="bar-t2" style="width: 85%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 DiaPredict Intelligence. All systems operational.</p>
+        </footer>
+    </div>
+
+    <script src="/static/js/script.js"></script>
+</body>
+</html>
